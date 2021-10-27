@@ -7,7 +7,7 @@ package tablas;
 public class Usuarios implements java.io.Serializable {
 
 	private Integer id;
-	private Roles roles;
+	private Integer idRol;
 	private String email;
 	private String clave;
 	private String nombre;
@@ -22,9 +22,9 @@ public class Usuarios implements java.io.Serializable {
 	public Usuarios() {
 	}
 
-	public Usuarios(Roles roles, String email, String clave, String nombre, String apellido1, String apellido2,
+	public Usuarios(Integer roles, String email, String clave, String nombre, String apellido1, String apellido2,
 			String direccion, String localidad, String provincia, String telefono, String dni) {
-		this.roles = roles;
+		this.idRol = roles;
 		this.email = email;
 		this.clave = clave;
 		this.nombre = nombre;
@@ -45,12 +45,12 @@ public class Usuarios implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Roles getRoles() {
-		return this.roles;
+	public Integer getidRol() {
+		return this.idRol;
 	}
 
-	public void setRoles(Roles roles) {
-		this.roles = roles;
+	public void setidRol(Integer roles) {
+		this.idRol = roles;
 	}
 
 	public String getEmail() {

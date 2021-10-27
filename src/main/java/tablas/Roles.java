@@ -1,5 +1,7 @@
 package tablas;
 
+// default package
+// Generated 27 oct 2021 18:30:09 by Hibernate Tools 5.5.7.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,11 +16,6 @@ public class Roles implements java.io.Serializable {
 	private Set usuarioses = new HashSet(0);
 
 	public Roles() {
-	}
-
-	public Roles(String rol, Set usuarioses) {
-		this.rol = rol;
-		this.usuarioses = usuarioses;
 	}
 
 	public Integer getId() {
