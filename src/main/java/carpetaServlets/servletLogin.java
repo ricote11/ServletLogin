@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import daos.UsuarioDao;
-import principal.Principal;
+
 import utils.HibernateUtil;
 
 /**
@@ -48,7 +48,7 @@ public class servletLogin extends HttpServlet {
 	    boolean condicion = user.consultaUsuarios(session, nombre, clave);
 	    if(condicion == true)
 	    {
-	    	 response.sendRedirect("envio.html");
+	    	 response.sendRedirect("Menu.jsp");
 	    	 logger.info("Informacion correcta!");
 	    	
 	    }
@@ -57,6 +57,7 @@ public class servletLogin extends HttpServlet {
 	    	
 	    	 response.sendRedirect("login.html");
 	    }
+	    //session.close();
 	}
 
 	/**
