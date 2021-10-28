@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -45,6 +46,9 @@ public class servletLogin extends HttpServlet {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		 
 	    UsuarioDao user = new UsuarioDao();
+	    String nombreUsuario = UsuarioDao.getNombreUser(session, nombre);
+	    HttpSession sesion = request.getSession(true);
+	    sesion.setAttribute("nombreUsuario", nombreUsuario);
 	    boolean condicion = user.consultaUsuarios(session, nombre, clave);
 	    if(condicion == true)
 	    {
