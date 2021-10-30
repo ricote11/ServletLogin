@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Usuarios implements java.io.Serializable {
 
 	private Integer id;
-	private Integer idRol;
+	private Integer id_rol;
 	private String email;
 	private String clave;
 	private String nombre;
@@ -27,10 +27,16 @@ public class Usuarios implements java.io.Serializable {
 
 	public Usuarios() {
 	}
+	public Usuarios(String clave, String nombre)
+	{
+		this.nombre = nombre;
+		this.clave = clave;
+		
+	}
 
-	public Usuarios(Integer roles, String email, String clave, String nombre, String apellido1, String apellido2,
+	public Usuarios(Integer id_rol, String email, String clave, String nombre, String apellido1, String apellido2,
 			String direccion, String localidad, String provincia, String telefono, String dni) {
-		this.idRol = roles;
+		this.id_rol = id_rol;
 		this.email = email;
 		this.clave = clave;
 		this.nombre = nombre;
@@ -53,12 +59,12 @@ public class Usuarios implements java.io.Serializable {
 		this.id = id;
 	}
 	@Column(name = "id_rol")
-	public Integer getidRol() {
-		return this.idRol;
+	public Integer getId_rol() {
+		return this.id_rol;
 	}
 
-	public void setidRol(Integer roles) {
-		this.idRol = roles;
+	public void setId_rol(Integer id_rol) {
+		this.id_rol = id_rol;
 	}
 	@Column(name = "email")
 	public String getEmail() {

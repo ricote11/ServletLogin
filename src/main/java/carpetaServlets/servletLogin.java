@@ -2,6 +2,8 @@ package carpetaServlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +17,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import daos.UsuarioDao;
-
+import tablas.Usuarios;
 import utils.HibernateUtil;
 
 /**
@@ -41,19 +43,38 @@ public class servletLogin extends HttpServlet {
 		// TODO Auto-generated method stub
  
 		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
 		String nombre = request.getParameter("nombre");
 		String clave = request.getParameter("clave");
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		 
 	    UsuarioDao user = new UsuarioDao();
-	    String nombreUsuario = UsuarioDao.getNombreUser(session, nombre);
-	    HttpSession sesion = request.getSession(true);
-	    sesion.setAttribute("nombreUsuario", nombreUsuario);
+	  
+	    
 	    boolean condicion = user.consultaUsuarios(session, nombre, clave);
 	    if(condicion == true)
 	    {
-	    	 response.sendRedirect("Menu.jsp");
-	    	 logger.info("Informacion correcta!");
+	    	String nombreUsuario = UsuarioDao.getNombreUser(session, nombre);
+	  	    HttpSession sesion = request.getSession(true);
+	  	    sesion.setAttribute("nombreUsuario", nombreUsuario);
+	  	    
+	  	    Usuarios idRol = UsuarioDao.getIdRol(session, nombre);
+	  	    int id = idRol.getId_rol();
+	  	    System.out.println("desde servlet login "+ id) ;
+	  	    sesion.setAttribute("idRol", id);
+	    	
+		    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+		    Date date = new Date(System.currentTimeMillis());
+		    sesion.setAttribute("hora", formatter.format(date));
+	    	response.sendRedirect("Menu.jsp");
+	    	logger.info("Informacion correcta!");
 	    	
 	    }
 	    else  {
@@ -62,14 +83,6 @@ public class servletLogin extends HttpServlet {
 	    	 response.sendRedirect("login.html");
 	    }
 	    //session.close();
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	    
 	}
 
